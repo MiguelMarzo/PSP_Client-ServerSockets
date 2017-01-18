@@ -19,11 +19,11 @@ public class Client {
 
     public static void main(String[] args) throws IOException {
         // When passing null to getByName, localhost is generated
-        InetAddress addr = InetAddress.getByName(null);
+        InetAddress addr = InetAddress.getByName("172.30.0.128");
         //OhterWise, these can be used for the same purpose;
         //InetAddress addr = InetAddress.getByName("127.0.0.1");
         System.out.println("addr = " + addr);
-        Socket socket = new Socket(addr, Server.PORT);
+        Socket socket = new Socket("172.30.0.128", Server.PORT);
 
         //Put everything inside a try-finally to make sure gets closed
         try {
