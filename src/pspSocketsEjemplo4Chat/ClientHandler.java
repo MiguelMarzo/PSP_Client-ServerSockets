@@ -2,6 +2,8 @@ package pspSocketsEjemplo4Chat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.Writer;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -27,6 +29,8 @@ public class ClientHandler extends Thread {
      * To write data in the socket.
      */
     private PrintWriter output;
+
+    private String convo = "";
 
     /**
      * Creates an instance of this class.
@@ -57,8 +61,24 @@ public class ClientHandler extends Thread {
             while (true) {
                 String text = input.readLine();
                 if (text != null) {
-                    System.out.println("Message received: " + text);
-                    output.println(text);
+                    if (text.equals("exportar")) {
+                        Writer writer = new BufferedWriter(
+                                new OutputStreamWriter(
+                                        new FileOutputStream("src/pspSocketsEjemplo4Chat/exportedChat.txt"), "utf-8"));
+                        writer.write("--------Exporting--------\n");
+                        writer.write(convo);
+                        writer.close();
+                        //PrintWriter writer = new PrintWriter("exportedChat.txt", "UTF-8");
+                        //writer.println("--------Exporting--------");
+                        //writer.println(convo);
+                        //writer.close();
+                        System.out.println("--------Exporting--------");
+                        System.out.println(convo);
+                    } else {
+                        System.out.println("Message received: " + text);
+                        output.println(text);
+                        convo += text + ("\n");
+                    }
                 }
             }
         } catch (SocketException e) {

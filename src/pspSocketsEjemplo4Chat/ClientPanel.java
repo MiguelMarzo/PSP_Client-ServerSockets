@@ -13,8 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * Panel to render the conversation and ask the user for the 
- * text they want to send.
+ * Panel to render the conversation and ask the user for the text they want to
+ * send.
  */
 public class ClientPanel {
 
@@ -38,10 +38,14 @@ public class ClientPanel {
      */
     private JButton button;
 
+    /*
+    * Button to export the chat
+     */
+    private JButton buttonExport;
+
     /**
-     * Creates the panel with all its components. 
-     * A text area to render the conversation, a textField to allow
-     * the user to write a message and a send
+     * Creates the panel with all its components. A text area to render the
+     * conversation, a textField to allow the user to write a message and a send
      * button.
      *
      */
@@ -53,22 +57,25 @@ public class ClientPanel {
         JPanel panel = new JPanel(new FlowLayout());
         textField = new JTextField(50);
         button = new JButton("Send");
+        buttonExport = new JButton("Export");
         panel.add(textField);
         panel.add(button);
+        panel.add(buttonExport);
 
         container.add(scroll, BorderLayout.CENTER);
         container.add(panel, BorderLayout.SOUTH);
     }
 
     /**
-    * Adds the actionListener passed whether the users 
-    * presses <enter> when the focus is on the textField
-    * or when clicks the send button.
+     * Adds the actionListener passed whether the users presses <enter> when the
+     * focus is on the textField or when clicks the send button.
+     *
      * @param action ActionListener to be added.
      */
     public void addActionListener(ActionListener action) {
         textField.addActionListener(action);
         button.addActionListener(action);
+        buttonExport.addActionListener(action);
     }
 
     /**
@@ -89,5 +96,9 @@ public class ClientPanel {
         String text = textField.getText();
         textField.setText("");
         return text;
+    }
+    
+    public String getTextAreaText() {
+        return textArea.getText();
     }
 }

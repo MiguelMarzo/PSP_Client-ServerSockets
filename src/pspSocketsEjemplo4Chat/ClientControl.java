@@ -1,4 +1,3 @@
-
 package pspSocketsEjemplo4Chat;
 
 import java.awt.event.ActionEvent;
@@ -11,9 +10,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
- * Waits for users requests. Displays in the panel textarea 
- * all the content that comes from the socket, i.e., whatever 
- * the user writes in the panel is sent
+ * Waits for users requests. Displays in the panel textarea all the content that
+ * comes from the socket, i.e., whatever the user writes in the panel is sent
  * through the socket.
  */
 public class ClientControl
@@ -60,17 +58,22 @@ public class ClientControl
     }
 
     /**
-     * Gets the text from the panel and sends it through the socket.
-     * The panel will call this method whenever the user writes 
-     * something down in it and presses the send button.
+     * Gets the text from the panel and sends it through the socket. The panel
+     * will call this method whenever the user writes something down in it and
+     * presses the send button.
      */
-   public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent event) {
         try {
-            String text = panel.getText();
-            if (text != null) {
-                output.println(text);
-                System.out.println(text);
+            if (event.getActionCommand().equals("Send")) {
+                String text = panel.getText();
+                if (text != null) {
+                    output.println(text);
+                    System.out.println(text);
+                }
+            } else if(event.getActionCommand().equals("Export")){
+                output.println("exportar");
             }
+
         } catch (Exception excepcion) {
             excepcion.printStackTrace();
         }
