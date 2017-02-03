@@ -43,27 +43,23 @@ public class Server {
                                         socket.getOutputStream())), true);
                 while (true) {
                     String str = input.readLine();
+                    double cantidad = Double.parseDouble(str.split("-")[1]);
                     if (str.equals("END")) {
                         break;
                     } else if (str.startsWith("I")) {
-                        double cantidad = Double.parseDouble(str.split("-")[1]);
-                        acc.incrementarBalance(cantidad);                        
-                        System.out.println("Command executed: " + str);
-                        System.out.println("Current balance: " + acc.getBalance());
-                        output.println(acc.getBalance());
+                        acc.incrementarBalance(cantidad);
                     } else if (str.startsWith("R")) {
-                        double cantidad = Double.parseDouble(str.split("-")[1]);
                         acc.decrementarBalance(cantidad);
-                        System.out.println("Command executed: " + str);
-                        System.out.println("Current balance: " + acc.getBalance());
-                        output.println(acc.getBalance());
                     }
+                    System.out.println("Command executed: " + str);
+                    System.out.println("Current balance: " + acc.getBalance());
+                    output.println(acc.getBalance());
 
                 }
                 //Always close both sockets...
             } finally {
                 System.out.println("Closing...");
-                //socket.close();
+                socket.close();
                 //server.close();
             }
         }
