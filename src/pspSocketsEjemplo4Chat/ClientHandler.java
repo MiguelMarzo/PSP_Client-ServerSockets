@@ -61,7 +61,7 @@ public class ClientHandler extends Thread {
             while (true) {
                 String text = input.readLine();
                 if (text != null) {
-                    if (text.equals("exportar")) {
+                    if (text.equals("/exportar")) {
                         Writer writer = new BufferedWriter(
                                 new OutputStreamWriter(
                                         new FileOutputStream("src/pspSocketsEjemplo4Chat/exportedChat.txt"), "utf-8"));
